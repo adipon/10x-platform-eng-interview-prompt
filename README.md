@@ -82,3 +82,5 @@ This endpoint allows for querying of data while filtering on different attribute
 `localhost:8000/api/query/?limit=3`
 
 `localhost:8000/api/query/?weather=rain&limit=1`
+
+Future work would add pagination to the results for easier processing of the data by clients.
