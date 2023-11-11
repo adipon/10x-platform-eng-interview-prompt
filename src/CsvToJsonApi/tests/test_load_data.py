@@ -1,5 +1,4 @@
 import os
-import unittest
 from django.core.management import call_command
 from django.test import TestCase
 from django.core.files.base import ContentFile
@@ -39,6 +38,3 @@ class LoadDataTestCase(TestCase):
 
         # Clean up the temporary file
         os.remove(self.csv_file_path)
-
-if __name__ == '__main__':
-    unittest.main()

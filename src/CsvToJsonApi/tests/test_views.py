@@ -1,5 +1,4 @@
 import json
-import unittest
 from django.test import TestCase, Client
 from django.core.files.uploadedfile import SimpleUploadedFile
 from CsvToJsonApi.models import WeatherData
@@ -42,5 +41,3 @@ class ViewsTestCase(TestCase):
         # Clean up
         test_csv_file.close()
 
-if __name__ == '__main__':
-    unittest.main()

@@ -1,24 +1,25 @@
-FROM PYTHON:3.11-slim-bullseye
+FROM python:3.10-slim-bullseye
 
 ADD requirements.txt /src/requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install -r /src/requirements.txt
 
-COPY src/* /src/
-COPY data/* /data
+ADD src/ /src/
+ADD scripts/ /scripts/
+
 WORKDIR /src
 
 # Sets a default admin password for local testing
 ENV DJANGO_SUPERUSER_PASSWORD "admin"
+ENV DJANGO_SETTINGS_MODULE "CsvToJsonApi.settings"
+ENV PYTHONPATH "${PYTHONPATH}:/src"
 
 # Create the database tables through the django migrations
 RUN python manage.py migrate
 
 # Run unit tests
-RUN python manage.py test CsvToJsonApi.tests
+RUN python manage.py test CsvToJsonApi/tests
 
-# Load seattle weather as a starting point
-RUN python manage.py load_data /data/seattle-weather.csv
-
+# Expose the port in which it runs. 
 EXPOSE 8000
 
-CMD ["python", "manage.py"]
+CMD ["/scripts/run_server.sh"]
