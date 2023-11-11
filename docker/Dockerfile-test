@@ -1,0 +1,14 @@
+FROM PYTHON:3.11-slim-bullseye
+
+ADD requirements.txt /src/requirements.txt
+RUN pip install -r requirements.txt
+
+COPY test/* /test/
+COPY data/* /data
+WORKDIR /test
+
+ARG DJANGO_APP_URL "http://localhost:8000"
+
+EXPOSE 80
+
+CMD ["python", "django_app_integration_test.py"]
